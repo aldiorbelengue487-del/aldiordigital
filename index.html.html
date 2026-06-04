@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>AldiorDigital — Conhecimento que transforma</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink:#0a0a0f;
+  --paper:#f5f3ee;
+  --accent:#e8410a;
+  --accent2:#1a3cff;
+  --gold:#c8960c;
+  --muted:#6b6860;
+  --border:#d8d5ce;
+  --card:#ffffff;
+  --radius:12px;
+  --font-display:'Syne',sans-serif;
+  --font-body:'DM Sans',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font-family:var(--font-body);font-size:16px;line-height:1.6;overflow-x:hidden}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:100;background:var(--paper);border-bottom:1.5px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 5%;height:64px}
+.nav-logo{font-family:var(--font-display);font-weight:800;font-size:1.2rem;letter-spacing:-.02em}
+.nav-logo span{color:var(--accent)}
+.nav-links{display:flex;gap:32px;list-style:none}
+.nav-links a{text-decoration:none;color:var(--muted);font-size:.9rem;font-weight:500;transition:color .2s}
+.nav-links a:hover{color:var(--ink)}
+.nav-cta{background:var(--ink);color:#fff;padding:8px 20px;border-radius:99px;font-size:.875rem;font-weight:500;text-decoration:none;transition:background .2s}
+.nav-cta:hover{background:var(--accent)}
+
+/* HERO */
+.hero{min-height:92vh;display:grid;grid-template-columns:1fr 1fr;gap:0;overflow:hidden}
+.hero-left{padding:80px 5% 80px 8%;display:flex;flex-direction:column;justify-content:center}
+.hero-tag{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:#fff;font-size:.75rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:6px 14px;border-radius:99px;margin-bottom:28px;width:fit-content}
+.hero-tag::before{content:'';width:6px;height:6px;background:#fff;border-radius:50%;display:inline-block}
+h1{font-family:var(--font-display);font-weight:800;font-size:clamp(2.4rem,4.5vw,4rem);line-height:1.05;letter-spacing:-.03em;margin-bottom:24px}
+h1 em{font-style:normal;color:var(--accent)}
+.hero-sub{color:var(--muted);font-size:1.1rem;font-weight:300;max-width:460px;margin-bottom:40px;line-height:1.7}
+.hero-actions{display:flex;gap:16px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;border-radius:99px;font-size:.95rem;font-weight:500;text-decoration:none;cursor:pointer;border:none;transition:all .2s}
+.btn-primary{background:var(--ink);color:#fff}
+.btn-primary:hover{background:var(--accent);transform:translateY(-2px)}
+.btn-outline{background:transparent;color:var(--ink);border:1.5px solid var(--border)}
+.btn-outline:hover{border-color:var(--ink);transform:translateY(-2px)}
+.hero-stats{display:flex;gap:40px;margin-top:56px;padding-top:40px;border-top:1px solid var(--border)}
+.stat-num{font-family:var(--font-display);font-size:2rem;font-weight:800;display:block}
+.stat-lbl{font-size:.8rem;color:var(--muted);font-weight:400}
+.hero-right{background:var(--ink);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.hero-pattern{position:absolute;inset:0;background-image:radial-gradient(circle at 60% 40%, rgba(232,65,10,.18) 0%, transparent 60%), radial-gradient(circle at 20% 80%, rgba(26,60,255,.12) 0%, transparent 50%)}
+.hero-card-stack{position:relative;width:300px;height:380px}
+.hcard{position:absolute;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:16px;backdrop-filter:blur(10px);padding:24px;color:#fff}
+.hcard:nth-child(1){width:260px;bottom:0;left:0;transform:rotate(-4deg)}
+.hcard:nth-child(2){width:260px;top:0;right:0;transform:rotate(3deg)}
+.hcard:nth-child(3){width:240px;top:50%;left:50%;transform:translate(-50%,-50%)}
+.hcard-label{font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;color:rgba(255,255,255,.5);margin-bottom:8px}
+.hcard-title{font-family:var(--font-display);font-weight:700;font-size:1rem;margin-bottom:4px}
+.hcard-price{font-size:1.4rem;font-weight:700;color:var(--accent)}
+.hcard-badge{display:inline-block;background:var(--accent);color:#fff;font-size:.65rem;font-weight:600;padding:2px 8px;border-radius:99px;text-transform:uppercase;margin-left:8px;vertical-align:middle}
+
+/* SECTION COMMONS */
+section{padding:96px 8%}
+.section-label{font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:.1em;color:var(--accent);margin-bottom:12px}
+.section-title{font-family:var(--font-display);font-weight:800;font-size:clamp(1.8rem,3vw,2.6rem);letter-spacing:-.025em;line-height:1.1;margin-bottom:16px}
+.section-sub{color:var(--muted);max-width:520px;font-weight:300;margin-bottom:56px}
+
+/* CATALOG */
+#catalogo{background:#fff}
+.filters{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:40px}
+.filter-btn{padding:7px 18px;border-radius:99px;font-size:.85rem;font-weight:500;border:1.5px solid var(--border);background:transparent;color:var(--muted);cursor:pointer;transition:all .2s}
+.filter-btn.active,.filter-btn:hover{background:var(--ink);color:#fff;border-color:var(--ink)}
+.products-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:24px}
+.product-card{background:var(--card);border:1.5px solid var(--border);border-radius:var(--radius);overflow:hidden;transition:all .25s;cursor:pointer}
+.product-card:hover{transform:translateY(-4px);box-shadow:0 16px 48px rgba(0,0,0,.1);border-color:var(--ink)}
+.product-thumb{height:160px;display:flex;align-items:center;justify-content:center;font-size:3rem;position:relative}
+.product-thumb.cyber{background:linear-gradient(135deg,#0a0a1a,#1a1040)}
+.product-thumb.finance{background:linear-gradient(135deg,#0f1a0a,#1a3010)}
+.product-thumb.ai{background:linear-gradient(135deg,#1a0a10,#300a1a)}
+.product-thumb.auto{background:linear-gradient(135deg,#0a141a,#0a2030)}
+.product-cat{position:absolute;top:12px;left:12px;font-size:.65rem;font-weight:600;text-transform:uppercase;letter-spacing:.08em;padding:4px 10px;border-radius:99px;color:#fff}
+.cat-cyber{background:rgba(26,60,255,.8)}
+.cat-finance{background:rgba(26,140,60,.8)}
+.cat-ai{background:rgba(200,20,80,.8)}
+.cat-auto{background:rgba(200,140,0,.8)}
+.product-type{position:absolute;top:12px;right:12px;font-size:.65rem;font-weight:600;padding:4px 10px;border-radius:99px;background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.2)}
+.product-info{padding:20px}
+.product-name{font-family:var(--font-display);font-weight:700;font-size:1rem;margin-bottom:6px;line-height:1.3}
+.product-desc{font-size:.85rem;color:var(--muted);font-weight:300;margin-bottom:16px;line-height:1.5}
+.product-footer{display:flex;align-items:center;justify-content:space-between}
+.product-price{font-family:var(--font-display);font-weight:800;font-size:1.2rem}
+.product-price small{font-size:.7rem;color:var(--muted);font-family:var(--font-body);font-weight:400}
+.btn-buy{background:var(--ink);color:#fff;border:none;padding:8px 18px;border-radius:99px;font-size:.8rem;font-weight:500;cursor:pointer;transition:all .2s}
+.btn-buy:hover{background:var(--accent)}
+.product-card[data-hidden="true"]{display:none}
+
+/* COMO FUNCIONA */
+#como-funciona{background:var(--ink);color:#fff}
+#como-funciona .section-label{color:rgba(232,65,10,.9)}
+#como-funciona .section-sub{color:rgba(255,255,255,.5)}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;position:relative}
+.steps::before{content:'';position:absolute;top:32px;left:12%;right:12%;height:1px;background:rgba(255,255,255,.12)}
+.step{text-align:center;padding:0 20px}
+.step-num{width:64px;height:64px;border-radius:50%;border:1.5px solid rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:800;font-size:1.1rem;margin:0 auto 24px;background:var(--ink);position:relative;z-index:1}
+.step:nth-child(1) .step-num{background:var(--accent);border-color:var(--accent);color:#fff}
+.step-title{font-family:var(--font-display);font-weight:700;font-size:1rem;margin-bottom:8px}
+.step-desc{font-size:.85rem;color:rgba(255,255,255,.45);font-weight:300;line-height:1.6}
+
+/* BLOG */
+#blog{background:var(--paper)}
+.blog-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:24px}
+.blog-card{background:#fff;border:1.5px solid var(--border);border-radius:var(--radius);overflow:hidden;cursor:pointer;transition:all .25s}
+.blog-card:hover{transform:translateY(-3px);box-shadow:0 12px 36px rgba(0,0,0,.08)}
+.blog-img{height:200px;display:flex;align-items:flex-end;padding:20px;position:relative;overflow:hidden}
+.blog-img.big{height:280px}
+.bi1{background:linear-gradient(160deg,#0a0f2a 0%,#1a2060 100%)}
+.bi2{background:linear-gradient(160deg,#0a200a 0%,#1a4010 100%)}
+.bi3{background:linear-gradient(160deg,#200a1a 0%,#400a30 100%)}
+.blog-tag{display:inline-block;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.2);color:#fff;font-size:.7rem;font-weight:600;text-transform:uppercase;letter-spacing:.08em;padding:4px 10px;border-radius:99px;backdrop-filter:blur(4px)}
+.blog-info{padding:20px}
+.blog-title{font-family:var(--font-display);font-weight:700;font-size:1rem;line-height:1.35;margin-bottom:8px}
+.blog-card.featured .blog-title{font-size:1.2rem}
+.blog-meta{font-size:.78rem;color:var(--muted);font-weight:300}
+
+/* PAGAMENTO */
+#pagamento{background:#fff}
+.payment-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+.payment-methods{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.pm-card{border:1.5px solid var(--border);border-radius:var(--radius);padding:20px;display:flex;flex-direction:column;gap:8px;transition:all .2s}
+.pm-card:hover{border-color:var(--ink);box-shadow:0 4px 20px rgba(0,0,0,.06)}
+.pm-icon{font-size:1.8rem}
+.pm-name{font-family:var(--font-display);font-weight:700;font-size:.95rem}
+.pm-desc{font-size:.8rem;color:var(--muted);font-weight:300}
+.security-badges{display:flex;gap:12px;margin-top:24px;flex-wrap:wrap}
+.badge{display:flex;align-items:center;gap:6px;font-size:.78rem;color:var(--muted);font-weight:400}
+.badge::before{content:'✓';color:#1a9040;font-weight:700}
+
+/* ÁREA DO CLIENTE */
+#area-cliente{background:var(--ink);color:#fff}
+#area-cliente .section-label{color:rgba(232,65,10,.9)}
+#area-cliente .section-sub{color:rgba(255,255,255,.5)}
+.auth-tabs{display:flex;gap:0;background:rgba(255,255,255,.06);border-radius:10px;padding:4px;width:fit-content;margin-bottom:32px}
+.auth-tab{padding:8px 24px;border-radius:8px;font-size:.85rem;font-weight:500;cursor:pointer;color:rgba(255,255,255,.5);transition:all .2s;border:none;background:transparent}
+.auth-tab.active{background:var(--accent);color:#fff}
+.auth-form{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:32px;max-width:400px}
+.form-group{margin-bottom:20px}
+.form-group label{display:block;font-size:.8rem;font-weight:500;color:rgba(255,255,255,.6);margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em}
+.form-group input{width:100%;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:8px;padding:12px 16px;color:#fff;font-size:.95rem;font-family:var(--font-body);transition:border .2s}
+.form-group input:focus{outline:none;border-color:rgba(255,255,255,.4)}
+.form-group input::placeholder{color:rgba(255,255,255,.3)}
+.btn-form{width:100%;background:var(--accent);color:#fff;border:none;border-radius:99px;padding:14px;font-size:.95rem;font-weight:500;cursor:pointer;font-family:var(--font-body);transition:all .2s;margin-top:8px}
+.btn-form:hover{background:#d03800;transform:translateY(-1px)}
+
+/* SUPORTE */
+#suporte{background:var(--paper)}
+.support-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.support-card{background:#fff;border:1.5px solid var(--border);border-radius:var(--radius);padding:32px;transition:all .25s}
+.support-card:hover{border-color:var(--ink);transform:translateY(-3px);box-shadow:0 12px 36px rgba(0,0,0,.08)}
+.support-icon{font-size:2rem;margin-bottom:16px}
+.support-title{font-family:var(--font-display);font-weight:700;font-size:1.05rem;margin-bottom:8px}
+.support-desc{font-size:.85rem;color:var(--muted);font-weight:300;line-height:1.6}
+.support-link{display:inline-flex;align-items:center;gap:6px;margin-top:16px;font-size:.85rem;font-weight:500;color:var(--accent);text-decoration:none}
+.support-link:hover{gap:10px}
+
+/* AFILIADOS */
+#monetizacao{background:#fff}
+.mono-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.mono-card{border-radius:var(--radius);padding:32px;position:relative;overflow:hidden}
+.mono-card.dark{background:var(--ink);color:#fff}
+.mono-card.accent{background:var(--accent);color:#fff}
+.mono-card.light{background:var(--paper);border:1.5px solid var(--border)}
+.mono-title{font-family:var(--font-display);font-weight:800;font-size:1.2rem;margin-bottom:8px}
+.mono-desc{font-size:.85rem;opacity:.7;font-weight:300;line-height:1.6;margin-bottom:20px}
+.mono-highlight{font-family:var(--font-display);font-size:2.4rem;font-weight:800;opacity:.15;position:absolute;bottom:16px;right:20px}
+
+/* FOOTER */
+footer{background:var(--ink);color:rgba(255,255,255,.6);padding:64px 8% 32px;font-size:.85rem}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;margin-bottom:48px}
+.footer-brand{font-family:var(--font-display);font-weight:800;font-size:1.2rem;color:#fff;margin-bottom:12px}
+.footer-brand span{color:var(--accent)}
+.footer-desc{font-weight:300;line-height:1.7;margin-bottom:20px}
+.footer-col h4{font-family:var(--font-display);font-weight:700;font-size:.9rem;color:#fff;margin-bottom:16px;text-transform:uppercase;letter-spacing:.05em}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:10px}
+.footer-col a{color:rgba(255,255,255,.5);text-decoration:none;transition:color .2s}
+.footer-col a:hover{color:#fff}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.1);padding-top:24px;display:flex;justify-content:space-between;align-items:center}
+.footer-copy{font-size:.78rem;color:rgba(255,255,255,.3)}
+
+/* TOAST */
+.toast{position:fixed;bottom:32px;right:32px;background:var(--ink);color:#fff;padding:14px 24px;border-radius:12px;font-size:.9rem;transform:translateY(80px);opacity:0;transition:all .3s;z-index:999;border-left:3px solid var(--accent)}
+.toast.show{transform:translateY(0);opacity:1}
+
+/* MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:200;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s;backdrop-filter:blur(4px)}
+.modal-overlay.open{opacity:1;pointer-events:all}
+.modal{background:#fff;border-radius:20px;padding:40px;max-width:500px;width:90%;transform:translateY(20px);transition:transform .3s}
+.modal-overlay.open .modal{transform:translateY(0)}
+.modal-close{float:right;background:none;border:none;font-size:1.4rem;cursor:pointer;color:var(--muted);margin-top:-8px}
+.modal-title{font-family:var(--font-display);font-weight:800;font-size:1.4rem;margin-bottom:4px}
+.modal-cat{font-size:.8rem;color:var(--muted);margin-bottom:20px}
+.modal-desc{font-size:.9rem;line-height:1.7;color:var(--muted);margin-bottom:24px}
+.modal-price{font-family:var(--font-display);font-weight:800;font-size:2rem;margin-bottom:24px;color:var(--ink)}
+.modal-price small{font-size:.9rem;color:var(--muted);font-weight:400;font-family:var(--font-body)}
+.modal-benefits{list-style:none;margin-bottom:28px;display:flex;flex-direction:column;gap:10px}
+.modal-benefits li{display:flex;align-items:center;gap:10px;font-size:.9rem;color:var(--muted)}
+.modal-benefits li::before{content:'✓';color:#1a9040;font-weight:700;font-size:1rem}
+.modal-actions{display:flex;gap:12px}
+
+/* Responsive */
+@media(max-width:768px){
+  .hero{grid-template-columns:1fr}
+  .hero-right{display:none}
+  .steps{grid-template-columns:1fr 1fr;gap:32px}
+  .steps::before{display:none}
+  .blog-grid{grid-template-columns:1fr}
+  .payment-grid{grid-template-columns:1fr}
+  .support-grid{grid-template-columns:1fr}
+  .mono-grid{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr 1fr}
+  .nav-links{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Aldior<span>Digital</span></div>
+  <ul class="nav-links">
+    <li><a href="#catalogo">Catálogo</a></li>
+    <li><a href="#blog">Blog</a></li>
+    <li><a href="#pagamento">Pagamento</a></li>
+    <li><a href="#suporte">Suporte</a></li>
+  </ul>
+  <a href="#area-cliente" class="nav-cta">Entrar</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <span class="hero-tag">Produtos digitais em Angola</span>
+    <h1>Conhecimento<br/>que <em>transforma</em><br/>carreiras</h1>
+    <p class="hero-sub">Ebooks, cursos e ferramentas de cibersegurança, IA e finanças — feitos para o mercado angolano e além.</p>
+    <div class="hero-actions">
+      <a href="#catalogo" class="btn btn-primary">Ver catálogo →</a>
+      <a href="#como-funciona" class="btn btn-outline">Como funciona</a>
+    </div>
+    <div class="hero-stats">
+      <div><span class="stat-num">1.2k+</span><span class="stat-lbl">Clientes ativos</span></div>
+      <div><span class="stat-num">38</span><span class="stat-lbl">Produtos digitais</span></div>
+      <div><span class="stat-num">4.9★</span><span class="stat-lbl">Avaliação média</span></div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-pattern"></div>
+    <div class="hero-card-stack">
+      <div class="hcard">
+        <div class="hcard-label">Curso em destaque</div>
+        <div class="hcard-title">Cibersegurança Prática</div>
+        <div class="hcard-price">12.500 Kz <span class="hcard-badge">Popular</span></div>
+      </div>
+      <div class="hcard">
+        <div class="hcard-label">Ebook</div>
+        <div class="hcard-title">IA para Negócios em África</div>
+        <div class="hcard-price">4.200 Kz</div>
+      </div>
+      <div class="hcard">
+        <div class="hcard-label">🔒 Compra segura</div>
+        <div class="hcard-title">Acesso imediato</div>
+        <div class="hcard-price" style="font-size:.9rem;opacity:.7">Multicaixa · PayPal · USD</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CATÁLOGO -->
+<section id="catalogo">
+  <div class="section-label">Catálogo</div>
+  <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:16px;margin-bottom:16px">
+    <h2 class="section-title" style="margin-bottom:0">Produtos em destaque</h2>
+  </div>
+  <div class="filters">
+    <button class="filter-btn active" onclick="filterProducts('todos',this)">Todos</button>
+    <button class="filter-btn" onclick="filterProducts('cibersegurança',this)">Cibersegurança</button>
+    <button class="filter-btn" onclick="filterProducts('ia',this)">Inteligência Artificial</button>
+    <button class="filter-btn" onclick="filterProducts('finanças',this)">Finanças</button>
+    <button class="filter-btn" onclick="filterProducts('automação',this)">Automação</button>
+    <button class="filter-btn" onclick="filterProducts('curso',this)">Só cursos</button>
+    <button class="filter-btn" onclick="filterProducts('ebook',this)">Só ebooks</button>
+  </div>
+  <div class="products-grid" id="products-grid">
+
+    <div class="product-card" data-cat="cibersegurança" data-type="curso" onclick="openModal('Cibersegurança Prática','Cibersegurança · Curso','Domine as ferramentas e técnicas usadas por profissionais de segurança digital. Do básico ao avançado, com labs práticos e certificado.','12.500 Kz','~35 USD',['8 módulos + 40 horas de conteúdo','Labs práticos com Kali Linux','Certificado digital incluso','Suporte por 6 meses','Acesso vitalício'])">
+      <div class="product-thumb cyber">
+        <span class="product-cat cat-cyber">Cibersegurança</span>
+        <span class="product-type">Curso</span>
+        🔐
+      </div>
+      <div class="product-info">
+        <div class="product-name">Cibersegurança Prática</div>
+        <div class="product-desc">Do básico ao avançado — hacking ético, redes e defesa de sistemas.</div>
+        <div class="product-footer">
+          <div class="product-price">12.500 Kz <small>~35 USD</small></div>
+          <button class="btn-buy">Comprar</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card" data-cat="ia" data-type="ebook" onclick="openModal('IA para Negócios em África','IA · Ebook','Um guia prático e acessível para empreendedores africanos que querem usar inteligência artificial para crescer os seus negócios.','4.200 Kz','~12 USD',['120 páginas com exemplos reais','Casos de uso para o mercado angolano','Ferramentas gratuitas e pagas','Prompt engineering incluído','PDF + versão audiobook'])">
+      <div class="product-thumb ai">
+        <span class="product-cat cat-ai">IA</span>
+        <span class="product-type">Ebook</span>
+        🤖
+      </div>
+      <div class="product-info">
+        <div class="product-name">IA para Negócios em África</div>
+        <div class="product-desc">Guia prático para usar inteligência artificial no dia a dia do seu negócio.</div>
+        <div class="product-footer">
+          <div class="product-price">4.200 Kz <small>~12 USD</small></div>
+          <button class="btn-buy">Comprar</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card" data-cat="finanças" data-type="curso" onclick="openModal('Finanças Pessoais com Excel','Finanças · Curso','Controle as suas finanças com planilhas inteligentes. Aprende a criar orçamentos, investir e planear a reforma.','8.900 Kz','~25 USD',['6 módulos práticos','Planilhas prontas para usar','Exemplos com Kwanza e USD','Calculadoras de investimento','Certificado incluso'])">
+      <div class="product-thumb finance">
+        <span class="product-cat cat-finance">Finanças</span>
+        <span class="product-type">Curso</span>
+        💰
+      </div>
+      <div class="product-info">
+        <div class="product-name">Finanças Pessoais com Excel</div>
+        <div class="product-desc">Controle total das suas finanças com planilhas práticas e estratégias comprovadas.</div>
+        <div class="product-footer">
+          <div class="product-price">8.900 Kz <small>~25 USD</small></div>
+          <button class="btn-buy">Comprar</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card" data-cat="automação" data-type="curso" onclick="openModal('Automação com Python','Automação · Curso','Automatiza tarefas repetitivas e cria bots, scrapers e scripts que trabalham por ti 24/7.','11.000 Kz','~31 USD',['Python do zero','Automação de WhatsApp e Excel','Web scraping avançado','Projetos reais incluídos','Suporte no Discord'])">
+      <div class="product-thumb auto">
+        <span class="product-cat cat-auto">Automação</span>
+        <span class="product-type">Curso</span>
+        ⚙️
+      </div>
+      <div class="product-info">
+        <div class="product-name">Automação com Python</div>
+        <div class="product-desc">Cria scripts e bots que automatizam o teu trabalho e poupam horas por semana.</div>
+        <div class="product-footer">
+          <div class="product-price">11.000 Kz <small>~31 USD</small></div>
+          <button class="btn-buy">Comprar</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card" data-cat="cibersegurança" data-type="ebook" onclick="openModal('Guia de Senhas Seguras','Cibersegurança · Ebook','Tudo o que precisas saber para proteger as tuas contas, dados e dispositivos com senhas e autenticação forte.','1.800 Kz','~5 USD',['50 páginas','Checklist de segurança incluído','Recomendações de ferramentas gratuitas','Atualizações vitalícias'])">
+      <div class="product-thumb cyber">
+        <span class="product-cat cat-cyber">Cibersegurança</span>
+        <span class="product-type">Ebook</span>
+        🛡️
+      </div>
+      <div class="product-info">
+        <div class="product-name">Guia de Senhas Seguras</div>
+        <div class="product-desc">Protege as tuas contas e dados com as melhores práticas de segurança digital.</div>
+        <div class="product-footer">
+          <div class="product-price">1.800 Kz <small>~5 USD</small></div>
+          <button class="btn-buy">Comprar</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card" data-cat="ia" data-type="curso" onclick="openModal('Prompt Engineering Avançado','IA · Curso','Domina a arte de comunicar com IAs como Claude, ChatGPT e Gemini para obter resultados extraordinários.','7.500 Kz','~21 USD',['5 módulos + exercícios','Biblioteca de 100+ prompts','Casos práticos por área','Comunidade exclusiva','Actualizações incluídas'])">
+      <div class="product-thumb ai">
+        <span class="product-cat cat-ai">IA</span>
+        <span class="product-type">Curso</span>
+        ✨
+      </div>
+      <div class="product-info">
+        <div class="product-name">Prompt Engineering Avançado</div>
+        <div class="product-desc">Domina a arte de extrair o máximo das IAs generativas para trabalho e negócios.</div>
+        <div class="product-footer">
+          <div class="product-price">7.500 Kz <small>~21 USD</small></div>
+          <button class="btn-buy">Comprar</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- COMO FUNCIONA -->
+<section id="como-funciona">
+  <div class="section-label">Processo</div>
+  <h2 class="section-title" style="color:#fff">Compra em 4 passos simples</h2>
+  <p class="section-sub">Do clique ao acesso imediato — sem esperas, sem processos manuais.</p>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-title">Escolhe o produto</div>
+      <div class="step-desc">Navega no catálogo e seleciona o curso ou ebook que precisas.</div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-title">Paga com segurança</div>
+      <div class="step-desc">Multicaixa Express, PayPal, cartão ou carteira digital — à tua escolha.</div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-title">Recebe o link</div>
+      <div class="step-desc">Em segundos, recebes o acesso por email e na área de membro.</div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-title">Aprende e cresce</div>
+      <div class="step-desc">Acesso vitalício ao conteúdo com suporte dedicado da nossa equipa.</div>
+    </div>
+  </div>
+</section>
+
+<!-- PAGAMENTO -->
+<section id="pagamento">
+  <div class="payment-grid">
+    <div>
+      <div class="section-label">Pagamento seguro</div>
+      <h2 class="section-title">Paga como preferires</h2>
+      <p class="section-sub" style="margin-bottom:32px">Aceitamos métodos locais e internacionais para que nenhum angolano fique de fora.</p>
+      <div class="security-badges">
+        <span class="badge">SSL 256-bit</span>
+        <span class="badge">Dados encriptados</span>
+        <span class="badge">Reembolso em 7 dias</span>
+        <span class="badge">Sem taxas ocultas</span>
+      </div>
+    </div>
+    <div class="payment-methods">
+      <div class="pm-card">
+        <div class="pm-icon">📱</div>
+        <div class="pm-name">Multicaixa Express</div>
+        <div class="pm-desc">Pagamento em Kwanza, direto do teu telemóvel</div>
+      </div>
+      <div class="pm-card">
+        <div class="pm-icon">🅿️</div>
+        <div class="pm-name">PayPal</div>
+        <div class="pm-desc">Pagamento internacional em USD ou EUR</div>
+      </div>
+      <div class="pm-card">
+        <div class="pm-icon">💳</div>
+        <div class="pm-name">Cartão bancário</div>
+        <div class="pm-desc">Visa, Mastercard — nacional e internacional</div>
+      </div>
+      <div class="pm-card">
+        <div class="pm-icon">🔑</div>
+        <div class="pm-name">Stripe</div>
+        <div class="pm-desc">Gateway seguro para pagamentos globais</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ÁREA DO CLIENTE -->
+<section id="area-cliente">
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start">
+    <div>
+      <div class="section-label">Conta</div>
+      <h2 class="section-title" style="color:#fff">Área do cliente</h2>
+      <p class="section-sub">Acede aos teus produtos a qualquer hora, de qualquer dispositivo.</p>
+      <ul style="list-style:none;display:flex;flex-direction:column;gap:14px;margin-top:8px">
+        <li style="display:flex;align-items:center;gap:12px;font-size:.9rem;color:rgba(255,255,255,.6)"><span style="color:#1a9040;font-weight:700">✓</span> Download imediato após pagamento</li>
+        <li style="display:flex;align-items:center;gap:12px;font-size:.9rem;color:rgba(255,255,255,.6)"><span style="color:#1a9040;font-weight:700">✓</span> Histórico completo de compras</li>
+        <li style="display:flex;align-items:center;gap:12px;font-size:.9rem;color:rgba(255,255,255,.6)"><span style="color:#1a9040;font-weight:700">✓</span> Suporte integrado por chat</li>
+        <li style="display:flex;align-items:center;gap:12px;font-size:.9rem;color:rgba(255,255,255,.6)"><span style="color:#1a9040;font-weight:700">✓</span> Acesso vitalício a atualizações</li>
+      </ul>
+    </div>
+    <div>
+      <div class="auth-tabs">
+        <button class="auth-tab active" onclick="switchTab('login',this)">Entrar</button>
+        <button class="auth-tab" onclick="switchTab('register',this)">Criar conta</button>
+      </div>
+      <div class="auth-form" id="login-form">
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" placeholder="teu@email.com"/>
+        </div>
+        <div class="form-group">
+          <label>Senha</label>
+          <input type="password" placeholder="••••••••"/>
+        </div>
+        <button class="btn-form" onclick="showToast('✓ Login realizado! Bem-vindo de volta.')">Entrar na conta</button>
+        <p style="text-align:center;margin-top:16px;font-size:.8rem;color:rgba(255,255,255,.3)">Esqueceste a senha? <a href="#" style="color:rgba(255,255,255,.6)">Recuperar</a></p>
+      </div>
+      <div class="auth-form" id="register-form" style="display:none">
+        <div class="form-group">
+          <label>Nome completo</label>
+          <input type="text" placeholder="O teu nome"/>
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" placeholder="teu@email.com"/>
+        </div>
+        <div class="form-group">
+          <label>Senha</label>
+          <input type="password" placeholder="Mínimo 8 caracteres"/>
+        </div>
+        <button class="btn-form" onclick="showToast('✓ Conta criada! Verifica o teu email.')">Criar conta grátis</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BLOG -->
+<section id="blog">
+  <div class="section-label">Blog</div>
+  <h2 class="section-title">Conteúdo gratuito</h2>
+  <p class="section-sub">Dicas semanais de cibersegurança, IA e finanças para o contexto angolano.</p>
+  <div class="blog-grid">
+    <div class="blog-card featured" onclick="showToast('A abrir artigo...')">
+      <div class="blog-img big bi1">
+        <span class="blog-tag">Cibersegurança</span>
+      </div>
+      <div class="blog-info">
+        <div class="blog-title">Como proteger a tua empresa de ataques de phishing em Angola</div>
+        <div class="blog-meta">12 Jun 2025 · 8 min leitura</div>
+      </div>
+    </div>
+    <div class="blog-card" onclick="showToast('A abrir artigo...')">
+      <div class="blog-img bi2">
+        <span class="blog-tag">IA</span>
+      </div>
+      <div class="blog-info">
+        <div class="blog-title">5 ferramentas de IA gratuitas para empreendedores</div>
+        <div class="blog-meta">5 Jun 2025 · 5 min</div>
+      </div>
+    </div>
+    <div class="blog-card" onclick="showToast('A abrir artigo...')">
+      <div class="blog-img bi3">
+        <span class="blog-tag">Finanças</span>
+      </div>
+      <div class="blog-info">
+        <div class="blog-title">Como poupar em Kwanza num cenário de inflação</div>
+        <div class="blog-meta">28 Mai 2025 · 6 min</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SUPORTE -->
+<section id="suporte">
+  <div class="section-label">Ajuda</div>
+  <h2 class="section-title">Estamos aqui para ti</h2>
+  <p class="section-sub">Suporte real, em português, com respostas rápidas.</p>
+  <div class="support-grid">
+    <div class="support-card" onclick="window.open('https://wa.me/244972996628','_blank')">
+      <div class="support-icon">💬</div>
+      <div class="support-title">WhatsApp Business</div>
+      <div class="support-desc">Fala connosco diretamente. Resposta em menos de 2 horas nos dias úteis.</div>
+      <a class="support-link">Enviar mensagem →</a>
+    </div>
+    <div class="support-card" onclick="showToast('A abrir FAQ...')">
+      <div class="support-icon">❓</div>
+      <div class="support-title">FAQ</div>
+      <div class="support-desc">Respostas rápidas às perguntas mais comuns sobre compras, acesso e reembolsos.</div>
+      <a class="support-link">Ver perguntas →</a>
+    </div>
+    <div class="support-card" onclick="showToast('A abrir email...')">
+      <div class="support-icon">✉️</div>
+      <div class="support-title">Email de suporte</div>
+      <div class="support-desc">Para questões mais detalhadas. Respondemos em até 24 horas úteis.</div>
+      <a class="support-link">Enviar email →</a>
+    </div>
+  </div>
+</section>
+
+<!-- MONETIZAÇÃO -->
+<section id="monetizacao">
+  <div class="section-label">Monetização</div>
+  <h2 class="section-title">Ganha mais com a AldiorDigital</h2>
+  <p class="section-sub">Além dos produtos, tens três formas de gerar receita extra.</p>
+  <div class="mono-grid">
+    <div class="mono-card dark">
+      <div class="mono-title">Programa de afiliados</div>
+      <div class="mono-desc">Promove os nossos produtos e recebe até 30% de comissão por cada venda feita com o teu link.</div>
+      <button class="btn" style="background:var(--accent);color:#fff;font-size:.85rem;padding:10px 20px" onclick="showToast('✓ Pedido de afiliado enviado!')">Quero ser afiliado</button>
+      <div class="mono-highlight">30%</div>
+    </div>
+    <div class="mono-card accent">
+      <div class="mono-title">Assinatura premium</div>
+      <div class="mono-desc">Acesso a todos os produtos + novidades mensais + grupo VIP por um valor fixo mensal.</div>
+      <button class="btn" style="background:#fff;color:var(--accent);font-size:.85rem;padding:10px 20px" onclick="showToast('A abrir planos de assinatura...')">Ver planos</button>
+      <div class="mono-highlight">∞</div>
+    </div>
+    <div class="mono-card light">
+      <div class="mono-title">Upsell & Consultoria</div>
+      <div class="mono-desc">Pacotes avançados com mentoria individual, auditoria de segurança e implementação personalizada.</div>
+      <button class="btn btn-primary" style="font-size:.85rem;padding:10px 20px" onclick="showToast('A abrir pedido de consultoria...')">Saber mais</button>
+      <div class="mono-highlight" style="opacity:.07">+</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-brand">Aldior<span>Digital</span></div>
+      <p class="footer-desc">A plataforma de produtos digitais de referência em Angola. Conhecimento acessível, conteúdo de qualidade, pagamento local.</p>
+      <div style="display:flex;gap:12px">
+        <a href="#" style="color:rgba(255,255,255,.4);text-decoration:none;font-size:.9rem">Instagram</a>
+        <a href="#" style="color:rgba(255,255,255,.4);text-decoration:none;font-size:.9rem">LinkedIn</a>
+        <a href="#" style="color:rgba(255,255,255,.4);text-decoration:none;font-size:.9rem">YouTube</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Produtos</h4>
+      <ul>
+        <li><a href="#">Cibersegurança</a></li>
+        <li><a href="#">Inteligência Artificial</a></li>
+        <li><a href="#">Finanças</a></li>
+        <li><a href="#">Automação</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Empresa</h4>
+      <ul>
+        <li><a href="#">Sobre nós</a></li>
+        <li><a href="#">Blog</a></li>
+        <li><a href="#">Afiliados</a></li>
+        <li><a href="#">Contacto</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Legal</h4>
+      <ul>
+        <li><a href="#">Termos de uso</a></li>
+        <li><a href="#">Privacidade</a></li>
+        <li><a href="#">Reembolsos</a></li>
+        <li><a href="#">Cookies</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2025 AldiorDigital. Todos os direitos reservados.</span>
+    <span class="footer-copy">Luanda, Angola 🇦🇴</span>
+  </div>
+</footer>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modal" onclick="closeModal(event)">
+  <div class="modal">
+    <button class="modal-close" onclick="document.getElementById('modal').classList.remove('open')">✕</button>
+    <div class="modal-title" id="m-title"></div>
+    <div class="modal-cat" id="m-cat"></div>
+    <div class="modal-desc" id="m-desc"></div>
+    <div class="modal-price" id="m-price"></div>
+    <ul class="modal-benefits" id="m-benefits"></ul>
+    <div class="modal-actions">
+      <button class="btn btn-primary" onclick="openPayment()">📱 Pagar via Multicaixa</button>
+      <button class="btn btn-outline" onclick="document.getElementById('modal').classList.remove('open')">Fechar</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL MULTICAIXA -->
+<div class="modal-overlay" id="modal-pay" onclick="closePayModal(event)">
+  <div class="modal" style="max-width:480px">
+    <button class="modal-close" onclick="document.getElementById('modal-pay').classList.remove('open')">✕</button>
+
+    <!-- PASSO 1 -->
+    <div id="pay-step1">
+      <div style="text-align:center;margin-bottom:24px">
+        <div style="font-size:3rem;margin-bottom:8px">📱</div>
+        <div class="modal-title">Pagar via Multicaixa Express</div>
+        <div style="font-size:.85rem;color:var(--muted);margin-top:4px">Produto: <span id="pay-produto" style="font-weight:600;color:var(--ink)"></span></div>
+      </div>
+      <div style="background:var(--paper);border-radius:12px;padding:24px;margin-bottom:24px">
+        <div style="font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:16px">Instruções de pagamento</div>
+        <div style="display:flex;flex-direction:column;gap:14px">
+          <div style="display:flex;align-items:flex-start;gap:12px">
+            <span style="background:var(--accent);color:#fff;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;flex-shrink:0">1</span>
+            <span style="font-size:.88rem;color:var(--muted)">Abre o app <strong style="color:var(--ink)">Multicaixa Express</strong> no teu telemóvel</span>
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:12px">
+            <span style="background:var(--accent);color:#fff;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;flex-shrink:0">2</span>
+            <span style="font-size:.88rem;color:var(--muted)">Vai a <strong style="color:var(--ink)">Transferir → Por número</strong></span>
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:12px">
+            <span style="background:var(--accent);color:#fff;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;flex-shrink:0">3</span>
+            <div style="font-size:.88rem;color:var(--muted)">Transfere o valor de <strong style="color:var(--ink)" id="pay-valor"></strong> para o número:<br/>
+              <div style="display:flex;align-items:center;gap:10px;margin-top:8px">
+                <span style="font-family:var(--font-display);font-size:1.3rem;font-weight:800;color:var(--ink);letter-spacing:.05em" id="pay-numero">+244 972 996 628</span>
+                <button onclick="copyNumber()" style="background:var(--ink);color:#fff;border:none;border-radius:99px;padding:4px 12px;font-size:.75rem;cursor:pointer">Copiar</button>
+              </div>
+            </div>
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:12px">
+            <span style="background:var(--accent);color:#fff;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;flex-shrink:0">4</span>
+            <span style="font-size:.88rem;color:var(--muted)">Na descrição escreve o teu <strong style="color:var(--ink)">email</strong> para receberes o produto</span>
+          </div>
+        </div>
+      </div>
+      <button class="btn btn-primary" style="width:100%;justify-content:center" onclick="goStep2()">✓ Já fiz o pagamento</button>
+      <p style="text-align:center;font-size:.78rem;color:var(--muted);margin-top:12px">Após confirmação, recebes o acesso em até <strong>2 horas</strong></p>
+    </div>
+
+    <!-- PASSO 2 -->
+    <div id="pay-step2" style="display:none">
+      <div style="text-align:center;margin-bottom:28px">
+        <div style="font-size:3rem;margin-bottom:8px">📧</div>
+        <div class="modal-title">Confirmar pagamento</div>
+        <p style="font-size:.88rem;color:var(--muted);margin-top:8px">Preenche os teus dados para enviarmos o produto.</p>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:16px;margin-bottom:24px">
+        <div>
+          <label style="font-size:.78rem;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);display:block;margin-bottom:6px">Nome completo</label>
+          <input id="conf-nome" type="text" placeholder="O teu nome" style="width:100%;border:1.5px solid var(--border);border-radius:8px;padding:12px 16px;font-size:.95rem;font-family:var(--font-body);outline:none"/>
+        </div>
+        <div>
+          <label style="font-size:.78rem;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);display:block;margin-bottom:6px">Email (para receber o produto)</label>
+          <input id="conf-email" type="email" placeholder="teu@email.com" style="width:100%;border:1.5px solid var(--border);border-radius:8px;padding:12px 16px;font-size:.95rem;font-family:var(--font-body);outline:none"/>
+        </div>
+        <div>
+          <label style="font-size:.78rem;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);display:block;margin-bottom:6px">Número do telemóvel usado</label>
+          <input id="conf-tel" type="tel" placeholder="+244 972 996 628" style="width:100%;border:1.5px solid var(--border);border-radius:8px;padding:12px 16px;font-size:.95rem;font-family:var(--font-body);outline:none"/>
+        </div>
+        <div>
+          <label style="font-size:.78rem;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);display:block;margin-bottom:6px">Foto do comprovativo (opcional)</label>
+          <input id="conf-file" type="file" accept="image/*" style="width:100%;border:1.5px solid var(--border);border-radius:8px;padding:10px 16px;font-size:.88rem;font-family:var(--font-body)"/>
+        </div>
+      </div>
+      <button class="btn btn-primary" style="width:100%;justify-content:center" onclick="submitConfirmation()">📤 Enviar confirmação</button>
+      <button onclick="goStep1()" style="display:block;width:100%;text-align:center;margin-top:12px;background:none;border:none;font-size:.82rem;color:var(--muted);cursor:pointer">← Voltar às instruções</button>
+    </div>
+
+    <!-- PASSO 3 -->
+    <div id="pay-step3" style="display:none;text-align:center;padding:16px 0">
+      <div style="font-size:4rem;margin-bottom:16px">✅</div>
+      <div class="modal-title" style="margin-bottom:12px">Confirmação recebida!</div>
+      <p style="font-size:.9rem;color:var(--muted);line-height:1.7;margin-bottom:24px">Recebemos o teu pedido. Após verificarmos o pagamento, enviaremos o acesso ao produto para o teu email em até <strong style="color:var(--ink)">2 horas</strong>.</p>
+      <div style="background:var(--paper);border-radius:12px;padding:16px;margin-bottom:24px;font-size:.85rem;color:var(--muted)">
+        💬 Dúvidas? Fala connosco no <strong style="color:var(--ink)">WhatsApp</strong> com o comprovativo.
+      </div>
+      <button class="btn btn-primary" style="justify-content:center" onclick="document.getElementById('modal-pay').classList.remove('open')">Fechar</button>
+    </div>
+  </div>
+</div>
+
+<script>
+let currentProduct = '';
+let currentPrice = '';
+
+function showToast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg;
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),3000);
+}
+
+function filterProducts(cat,btn){
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.product-card').forEach(card=>{
+    if(cat==='todos'){card.dataset.hidden='false';return}
+    if(cat==='curso'||cat==='ebook'){
+      card.dataset.hidden = card.dataset.type===cat ? 'false':'true';
+    } else {
+      card.dataset.hidden = card.dataset.cat===cat ? 'false':'true';
+    }
+  });
+}
+
+function openModal(title,cat,desc,price,usd,benefits){
+  currentProduct = title;
+  currentPrice = price;
+  document.getElementById('m-title').textContent=title;
+  document.getElementById('m-cat').textContent=cat;
+  document.getElementById('m-desc').textContent=desc;
+  document.getElementById('m-price').innerHTML=price+' <small>'+usd+'</small>';
+  const ul=document.getElementById('m-benefits');
+  ul.innerHTML='';
+  benefits.forEach(b=>{const li=document.createElement('li');li.textContent=b;ul.appendChild(li);});
+  document.getElementById('modal').classList.add('open');
+}
+
+function openPayment(){
+  document.getElementById('modal').classList.remove('open');
+  document.getElementById('pay-produto').textContent = currentProduct;
+  document.getElementById('pay-valor').textContent = currentPrice;
+  goStep1();
+  document.getElementById('modal-pay').classList.add('open');
+}
+
+function goStep1(){
+  document.getElementById('pay-step1').style.display='block';
+  document.getElementById('pay-step2').style.display='none';
+  document.getElementById('pay-step3').style.display='none';
+}
+
+function goStep2(){
+  document.getElementById('pay-step1').style.display='none';
+  document.getElementById('pay-step2').style.display='block';
+}
+
+function submitConfirmation(){
+  const nome = document.getElementById('conf-nome').value.trim();
+  const email = document.getElementById('conf-email').value.trim();
+  const tel = document.getElementById('conf-tel').value.trim();
+  if(!nome || !email || !tel){
+    showToast('⚠️ Preenche todos os campos obrigatórios');
+    return;
+  }
+  document.getElementById('pay-step2').style.display='none';
+  document.getElementById('pay-step3').style.display='block';
+}
+
+function copyNumber(){
+  navigator.clipboard.writeText('+244 972 996 628').then(()=>{
+    showToast('✓ Número copiado!');
+  }).catch(()=>{
+    showToast('Número: +244 972 996 628');
+  });
+}
+
+function closeModal(e){
+  if(e.target.id==='modal') document.getElementById('modal').classList.remove('open');
+}
+
+function closePayModal(e){
+  if(e.target.id==='modal-pay') document.getElementById('modal-pay').classList.remove('open');
+}
+
+function switchTab(tab,btn){
+  document.querySelectorAll('.auth-tab').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('login-form').style.display=tab==='login'?'block':'none';
+  document.getElementById('register-form').style.display=tab==='register'?'block':'none';
+}
+</script>
+</body>
+</html>
